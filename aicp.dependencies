@@ -1,0 +1,11 @@
+[
+ {
+ "repository": "android_device_qcom_common",
+ "target_path": "device/qcom/common"
+ },
+ {
+ "repository": "deepakgangwar/android_kernel_motorola_msm8226",
+ "target_path": "kernel/motorola/msm8226",
+ "branch": "n7.1"
+ }
+]
