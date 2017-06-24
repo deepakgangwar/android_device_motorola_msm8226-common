@@ -23,9 +23,9 @@ INITIAL_COPYRIGHT_YEAR=2013
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-CM_ROOT="$MY_DIR"/../../..
+AICP_ROOT="$MY_DIR"/../../..
 
-HELPER="$CM_ROOT"/vendor/cm/build/tools/extract_utils.sh
+HELPER="$AICP_ROOT"/vendor/aicp/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -54,25 +54,25 @@ fi
 
 if [ -n "$SETUP" ]; then
     # Initialize the helper for common
-    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true false
+    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$AICP_ROOT" true false
     "$MY_DIR"/setup-makefiles.sh false
 
     if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
         # Initalize the helper for device
         INITIAL_COPYRIGHT_YEAR="$DEVICE_BRINGUP_YEAR"
-        setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false false
+        setup_vendor "$DEVICE" "$VENDOR" "$AICP_ROOT" false false
         "$MY_DIR"/setup-makefiles.sh false
     fi
 else
     # Initialize the helper for common
-    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true "$CLEANUP"
+    setup_vendor "$DEVICE_COMMON" "$VENDOR" "$AICP_ROOT" true "$CLEANUP"
 
     extract "$MY_DIR"/proprietary-files.txt "$SRC"
 
     if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
         # Reinitialize the helper for device
         INITIAL_COPYRIGHT_YEAR="$DEVICE_BRINGUP_YEAR"
-        setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" false "$CLEANUP"
+        setup_vendor "$DEVICE" "$VENDOR" "$AICP_ROOT" false "$CLEANUP"
 
         extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
     fi
